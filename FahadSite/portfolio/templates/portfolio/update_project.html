@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #597081;
+    }
+</style>
+
+<div class="container py-5">
+    <h1 class="text-center text-white">Update Project: {{ project.name }}</h1>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+            <form class="d-flex flex-column gap-2" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <input type="text" placeholder="Project Name" name="name" value="{{ form.name.value }}" class="form-control">
+                <textarea placeholder="Description" name="description" class="form-control">{{ form.description.value }}</textarea>
+                <input type="url" placeholder="GitHub Link" name="github_link" value="{{ form.github_link.value }}" class="form-control">
+                <input type="date" name="date" value="{{ form.date.value }}" class="form-control">
+                <select class="form-select" name="tools" multiple>
+                    {% for choice, label in form.tools.field.choices %}
+                        <option value="{{ choice }}" {% if choice in form.tools.value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                
+                <div class="col">
+                    <input type="file" name="image" class="form-control">
+                </div>
+                
+                <div class="d-flex flex-row gap-2">
+                    <button type="submit" class="btn btn-primary w-50">Update Project</button>
+                    <button type="button" class="btn btn-danger w-50" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Delete Confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Project</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the project "{{ project.name }}"?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{% url 'delete_project' project.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

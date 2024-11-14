@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 bg-light sidebar">
+            <h3 class="my-4">Dashboard</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link {% if model_name == 'posts' %}active{% endif %}" href="{% url 'dashboard_model' 'posts' %}">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if model_name == 'comments' %}active{% endif %}" href="{% url 'dashboard_model' 'comments' %}">Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if model_name == 'contacts' %}active{% endif %}" href="{% url 'dashboard_model' 'contacts' %}">Contacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if model_name == 'projects' %}active{% endif %}" href="{% url 'dashboard_model' 'projects' %}">Projects</a>
+                </li>
+            </ul>
+        </div>
+
+       
+        <div class="col-md-10">
+            <h2>Manage {{ item_type }}s</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        {% if model_name == 'posts' %}
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Likes</th>
+                            <th>Published</th>
+                        {% elif model_name == 'comments' %}
+                            <th>Post</th>
+                            <th>Name</th>
+                            <th>Content</th>
+                            <th>Created At</th>
+                        {% elif model_name == 'contacts' %}
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                        {% elif model_name == 'projects' %}
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Tools</th>
+                            <th>Date</th>
+                            <th>GitHub</th>
+                        {% endif %}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            {% if model_name == 'posts' %}
+                                <td>{{ item.title }}</td>
+                                <td>{{ item.get_category_display }}</td>
+                                <td>{{ item.likes }}</td>
+                                <td>{{ item.published_at }}</td>
+                            {% elif model_name == 'comments' %}
+                                <td>{{ item.post.title }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.content }}</td>
+                                <td>{{ item.created_at }}</td>
+                            {% elif model_name == 'contacts' %}
+                                <td>{{ item.first_name }}</td>
+                                <td>{{ item.last_name }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.message }}</td>
+                            {% elif model_name == 'projects' %}
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.description|truncatewords:10 }}</td>
+                                <td>{{ item.get_tools_display }}</td>
+                                <td>{{ item.date }}</td>
+                                <td><a href="{{ item.github_link }}" target="_blank">GitHub</a></td>
+                            {% endif %}
+                            <td>
+                                <a href="#" class="btn btn-info btn-sm">View</a>
+                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

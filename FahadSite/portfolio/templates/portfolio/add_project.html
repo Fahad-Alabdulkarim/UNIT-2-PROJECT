@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body{
+        background-color: #597081;
+    }
+</style>
+<div class="bg-color">
+<h1 class="text-center text-white">Add Project</h1>
+<div class="d-flex justify-content-center ">
+    <div class="col-md-6">
+        <form class="d-flex flex-column gap-2" action="{% url 'add_project' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" placeholder="Project Name" name="name" class="form-control">
+            <textarea placeholder="Description" name="description" class="form-control"></textarea>
+            <textarea placeholder="GitHub Link" name="github_link" class="form-control"></textarea>
+            <input type="date" name="date" class="form-control">
+            <select class="form-select" name="tools" multiple>
+                <option value="Python">Python</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="CSS">CSS</option>
+                <option value="React">React</option>
+                <option value="Django">Django</option>
+                <option value="Bootstrap">Bootstrap</option>
+            </select>
+            <div class="col">
+                <input type="file" name="image" multiple class="form-control">
+            </div>
+            <input type="submit" value="Add Project" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
