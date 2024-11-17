@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body{
+        background-color: #597081;
+    }
+</style>
+<div class="d-flex flex-column align-items-center pb-5 mb-5">
+    <h1 class="mb-4">Contact Details</h1>
+    <table class="table table-bordered w-50 text-center bg-light border-dark">
+        <tr>
+            <th>First Name:</th>
+            <td>{{ contact.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Last Name:</th>
+            <td>{{ contact.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{ contact.email }}</td>
+        </tr>
+        <tr>
+            <th>Message:</th>
+            <td>{{ contact.message }}</td>
+        </tr>
+        <tr>
+            <th>Created At:</th>
+            <td>{{ contact.created_at }}</td>
+        </tr>
+    </table>
+
+    <div class="d-flex gap-3 mt-3">
+        <form action="{% url 'contacts_delete' contact.id %}" method="post" onsubmit="return confirm('Are you sure you want to delete this contact?');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+
+        <a href="{% url 'contact_messages' %}" class="btn btn-secondary">Back to Contacts</a>
+    </div>
+</div>
+{% endblock %}

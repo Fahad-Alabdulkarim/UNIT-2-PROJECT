@@ -8,11 +8,7 @@ class ProjectForm(forms.ModelForm):
         required=True
     )
     
-    tools = forms.MultipleChoiceField(
-        choices=Project.DevelopmentTools.choices,
-        widget=forms.SelectMultiple(),
-        required=True
-    )
+
     
     class Meta:
         model = Project

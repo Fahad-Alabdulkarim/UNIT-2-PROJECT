@@ -4,6 +4,7 @@
 {% block title %}Home - My Website{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
     .video-bg {
@@ -23,9 +24,31 @@
     overflow: hidden; 
     color: white; 
 }
+
+    body{
+        background-color: #597081;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    .down-arrow {
+        position: absolute;
+        bottom: 90px;
+        font-size: 30px;
+        color: rgb(0, 163, 217);
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .down-arrow:hover {
+        transform: translateY(5px);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
 </style>
 
-<section class="d-flex flex-column justify-content-center align-items-center bg-img min-vh-100">
+<section  class="d-flex flex-column justify-content-center align-items-center bg-img vh-100">
 
     
     <video autoplay muted loop class="video-bg">
@@ -40,53 +63,30 @@
         <hr>
         <p>I build websites</p>
     </div>
+    <a href="#info" class="down-arrow">
+        <i class="fa fa-arrow-down"></i>
+    </a>
 </section>
 
-<section class="mb-0 pb-0" style="background-color: #7EA0B7;">
-    <div class="jumbotron d-flex flex-column justify-content-center align-items-center  min-vh-100 mb-0 pb-0" >
-        <h1> About me</h1>
-        <h3>I am a graduate of King Fahd University of Petroleum and Minerals, holding a Bachelor's degree in Computer Science. I have a strong passion for web development, where I enjoy creating dynamic and user-friendly applications. Constantly seeking to expand my skill set, I am particularly interested in exploring new tools and technologies. My goal is to leverage my knowledge to develop innovative solutions that make a positive impact.
-
-        </h3>
-
-    </div>
-</section>
-
-<section style="background-color: #7EA0B7;" class="min-vh-100 mt-0 pt-0">
-    <div class=" container " >
-            <h1 class="font-weight-bold text-center pt-3 mb-3"> Experience</h1>
-            <h2 class="font-weight-bold text-start">Business analysist, Sparc consulting</h2>
-            <h3>june 2023 - August 2023
-            </h3>
-            <h4><p>• Analyzed financial reports to identify trends, patterns, and anomalies.<br>
-                • Gathered and organized financial data for accurate analysis.<br>
-                • Developed data models, dashboards, and visualizations for effective insights.<br>
-                • Generated comprehensive reports and presentations for stakeholders.<br>
-                • Collaborated with cross-functional teams to streamline financial data analysis, 
-                contributing to more than ten project initiative cards.</p></h4>
+<section id="info" style="background-color: #7EA0B7;" class="mb-0 pb-0" style="background-color: #7EA0B7;">
+    <div class="jumbotron d-flex flex-column justify-content-center align-items-center  min-vh-100 mb-0 pb-0" style="background-color: #7EA0B7;">
+        <div class="d-flex flex-row gap-2">
+            <img src="{% static 'images/download.jpeg' %}"  height="300" width="300" alt="Fahad">
+            <div class="ml-4">
+                <h1> About me</h1>
+                <h3>I am a graduate of King Fahd University of Petroleum and Minerals, holding a Bachelor's degree in Computer Science. I have a strong passion for web development, where I enjoy creating dynamic and user-friendly applications. Constantly seeking to expand my skill set, I am particularly interested in exploring new tools and technologies. My goal is to leverage my knowledge to develop innovative solutions that make a positive impact.</h3>
+            </div>
+        </div>
+        <div class="d-flex flex-row gap-2 mb-4 mt-5">
+            <a href="{% url 'about' %}" class="btn btn-info btn-lg ">Learn more</a>
+            <a href="{% url 'contact_us' %}" class="btn btn-dark btn-lg">Contact me!</a>
+        </div>
         
-
-    </div>
-
-</section>
-
-<section>
-    <div class="jumbotron text-center mb-0 pb-0">
-        <h1>Let's Chat</h1>
-        <form action="" class="mx-auto" style="max-width: 500px;">
-            <div class="form-group my-3">
-                <input type="text" class="form-control" id="name" placeholder="Enter your name">
-            </div>
-            <div class="form-group my-3">
-                <input type="email" class="form-control" id="email" placeholder="Enter your email">
-            </div>
-            <div class="form-group my-3">
-                <textarea class="form-control" id="message" rows="4" placeholder="Write your message here"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3 mb-3">Send Message</button>
-        </form>
     </div>
 </section>
+
+
+
 
 
 {% endblock %}

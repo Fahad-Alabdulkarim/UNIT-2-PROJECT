@@ -12,7 +12,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField()
-    tools = MultiSelectField(choices=DevelopmentTools.choices, max_length=100, default=[])
+    tools = models.CharField(max_length=50,choices=DevelopmentTools,default='python',)
     date = models.DateField(blank=True,null=True)
     github_link = models.URLField(blank=True, null=True)
 

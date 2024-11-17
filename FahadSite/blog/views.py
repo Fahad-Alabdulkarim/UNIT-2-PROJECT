@@ -34,7 +34,7 @@ def update_post(request, blog_id):
         form = PostForm(instance=post)
     return render(request, "update_post.html", {"form": form, "post": post})
 
-def blog_detail_view(request, blog_id):
+def posts_detail(request, blog_id):
     post = get_object_or_404(Post, pk=blog_id)
     comments = post.comments.all()
     if request.method == "POST":
@@ -44,14 +44,14 @@ def blog_detail_view(request, blog_id):
                 comment = comment_form.save(commit=False)
                 comment.post = post
                 comment.save()
-                return redirect("blog_detail", blog_id=post.id)
+                return redirect("posts_detail", blog_id=post.id)
         elif "like" in request.POST:
             post.likes += 1
             post.save()
-            return redirect("blog_detail", blog_id=post.id)
+            return redirect("posts_detail", blog_id=post.id)
     else:
         comment_form = CommentForm()
-    return render(request, 'blog_detail.html', {"post": post, "comments": comments, "comment_form": comment_form})
+    return render(request, 'posts_detail.html', {"post": post, "comments": comments, "comment_form": comment_form})
 
 
 def delete_post(request, blog_id):
@@ -63,4 +63,4 @@ def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     blog_id = comment.post.id
     comment.delete()
-    return redirect("blog_detail", blog_id=blog_id)
+    return redirect("posts_detail", blog_id=blog_id)

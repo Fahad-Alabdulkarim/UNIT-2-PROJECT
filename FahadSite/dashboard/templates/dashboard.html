@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid mb-5 pb-5">
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-2 bg-light sidebar">
@@ -16,38 +16,71 @@
                     <a class="nav-link {% if model_name == 'contacts' %}active{% endif %}" href="{% url 'dashboard_model' 'contacts' %}">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if model_name == 'projects' %}active{% endif %}" href="{% url 'dashboard_model' 'projects' %}">Projects</a>
+                    <a class="nav-link {% if model_name == 'project' %}active{% endif %}" href="{% url 'dashboard_model' 'project' %}">Projects</a>
                 </li>
             </ul>
         </div>
 
-       
         <div class="col-md-10">
-            <h2>Manage {{ item_type }}s</h2>
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <h2>Manage {{ item_type }}s</h2>
+
+                <form method="get" class="mb-3 mt-3 d-flex align-items-center">
+                    <input type="text" name="search" value="{{ search_query }}" class="form-control me-2" placeholder="Search {{ item_type }}s">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            
+
             <table class="table table-striped">
                 <thead>
                     <tr>
                         {% if model_name == 'posts' %}
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Likes</th>
-                            <th>Published</th>
+                            <th>
+                                <a href="?sort=title{% if current_sort == 'title' %}-{% endif %}&search={{ search_query }}">Title</a>
+                            </th>
+                            <th>
+                                <a href="?sort=category{% if current_sort == 'category' %}-{% endif %}&search={{ search_query }}">Category</a>
+                            </th>
+                            <th>
+                                <a href="?sort=likes{% if current_sort == 'likes' %}-{% endif %}&search={{ search_query }}">Likes</a>
+                            </th>
+                            <th>
+                                <a href="?sort=published_at{% if current_sort == 'published_at' %}-{% endif %}&search={{ search_query }}">Published</a>
+                            </th>
                         {% elif model_name == 'comments' %}
-                            <th>Post</th>
-                            <th>Name</th>
-                            <th>Content</th>
-                            <th>Created At</th>
+                            <th>
+                                <a href="?sort=name{% if current_sort == 'name' %}-{% endif %}&search={{ search_query }}">Name</a>
+                            </th>
+                            <th>
+                                <a href="?sort=content{% if current_sort == 'content' %}-{% endif %}&search={{ search_query }}">Content</a>
+                            </th>
+                            <th>
+                                <a href="?sort=created_at{% if current_sort == 'created_at' %}-{% endif %}&search={{ search_query }}">Created At</a>
+                            </th>
                         {% elif model_name == 'contacts' %}
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Message</th>
-                        {% elif model_name == 'projects' %}
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Tools</th>
-                            <th>Date</th>
-                            <th>GitHub</th>
+                            <th>
+                                <a href="?sort=first_name{% if current_sort == 'first_name' %}-{% endif %}&search={{ search_query }}">First Name</a>
+                            </th>
+                            <th>
+                                <a href="?sort=last_name{% if current_sort == 'last_name' %}-{% endif %}&search={{ search_query }}">Last Name</a>
+                            </th>
+                            <th>
+                                <a href="?sort=email{% if current_sort == 'email' %}-{% endif %}&search={{ search_query }}">Email</a>
+                            </th>
+                        {% elif model_name == 'project' %}
+                            <th>
+                                <a href="?sort=name{% if current_sort == 'name' %}-{% endif %}&search={{ search_query }}">Name</a>
+                            </th>
+                            <th>
+                                <a href="?sort=description{% if current_sort == 'description' %}-{% endif %}&search={{ search_query }}">Description</a>
+                            </th>
+                            <th>
+                                <a href="?sort=tools{% if current_sort == 'tools' %}-{% endif %}&search={{ search_query }}">Tools</a>
+                            </th>
+                            <th>
+                                <a href="?sort=date{% if current_sort == 'date' %}-{% endif %}&search={{ search_query }}">Date</a>
+                            </th>
                         {% endif %}
                         <th>Actions</th>
                     </tr>
@@ -61,7 +94,6 @@
                                 <td>{{ item.likes }}</td>
                                 <td>{{ item.published_at }}</td>
                             {% elif model_name == 'comments' %}
-                                <td>{{ item.post.title }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.content }}</td>
                                 <td>{{ item.created_at }}</td>
@@ -69,22 +101,33 @@
                                 <td>{{ item.first_name }}</td>
                                 <td>{{ item.last_name }}</td>
                                 <td>{{ item.email }}</td>
-                                <td>{{ item.message }}</td>
-                            {% elif model_name == 'projects' %}
+                            {% elif model_name == 'project' %}
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.description|truncatewords:10 }}</td>
                                 <td>{{ item.get_tools_display }}</td>
                                 <td>{{ item.date }}</td>
-                                <td><a href="{{ item.github_link }}" target="_blank">GitHub</a></td>
                             {% endif %}
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View</a>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                {% if model_name == 'posts' %}
+                                    <a href="{% url model_name|add:'_detail' item.id %}" class="btn btn-info btn-sm">View</a>
+                                    <a href="{% url model_name|add:'_update' item.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{% url model_name|add:'_delete' item.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                                {% elif model_name == 'comments' %}
+                                    <a href="{% url model_name|add:'_delete' item.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</a>
+                                {% elif model_name == 'contacts' %}
+                                    <a href="{% url model_name|add:'_delete' item.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this contact?');">Delete</a>
+                                    <a href="{% url model_name|add:'_detail' item.id %}" class="btn btn-info btn-sm">View</a>
+                                {% elif model_name == 'project' %}
+                                    <a href="{% url model_name|add:'_detail' item.id %}" class="btn btn-info btn-sm">View</a>
+                                    <a href="{% url model_name|add:'_update' item.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{% url model_name|add:'_delete' item.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?');">Delete</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
+                
+                
             </table>
         </div>
     </div>

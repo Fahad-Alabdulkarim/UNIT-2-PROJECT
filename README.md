@@ -1,75 +1,41 @@
 # UNIT-2-PROJECT
 
 
-## Create a Personal Website
-
-
-A personal website is website that represents you , your work , your career , your interests and so on. It could be highly stylish , fun, or simple, serious and so on. You choose how you represent yourself online !
-
-
-
-### Inspirations:
-- https://www.shanekinkennon.com
-- https://www.joshrubietta.com
-- https://www.jencarrington.com
-- https://www.amywutoo.com
-- https://www.ginakirlew.com
-
-
-
-## Minumum Requirements
-
-- Use Django.
-- Use Templates & Template Inheritance.
-- Organize your project in apps as needed.
-- Use models to represent you data.
-- Use naming conventions.
-- Strive to make the user journey intuitive and complete.
-- At least 4 pages.
-- At least 2 models.
-- Must be responsive (looks good on big & small screens). 
-- You can use a CSS library to style your website (such as Bootstrap or equivalent)
-- You can use a cdn or a cloud storage to host large files such as large videos (example: Goolge Firebase Cloud Storage: https://firebase.google.com/docs/storage)
-- User Stories(shared as a link to document or added as a file).
-- Wireframe (shared as link or uploaded as a file) - You can use Figma or similar online wireframing/design software.
-- UML (shared as a link or uploaded as a file) - You can use Lucid Charts or similar online UML design tool.
 
 ## (Project Name)
-(project description here.)
+FahadSite
 
 ## Features List
-- (list of features)
+Add, update, and delete projects, with support for multiple images.
+Add, update, and delete blogs.
+A comment section for blog posts.
+A contact message feature to manage user messages.
+A dashboard for managing these features.
 
 ## User Stories, Wireframes & UML links
-- (User stories document link here.)
-- (wireframe link here.)
-- (UML link here.)
+As a visitor, I want to browse through your projects so that I can learn about your work and the technologies you've used.
+
+As a visitor, I want to read your blog posts so that I can gain insights on topics you're passionate about or related to your work.
+
+As a visitor, I want to read your "About" page so that I can understand who you are and what you do.
+
+As a visitor, I want to contact you using a form so that I can reach out for questions or collaborations.
+
+As a visitor, I want to leave a comment on your blog posts so that I can engage with the content and start a conversation.
+
+As a user, I want to add, update, or delete projects on the site, so that I can keep my portfolio up to date with new work.
+
+As a user, I want to add, update, or delete blog posts, so that I can keep my blog fresh with new articles or remove outdated content.
+
+As a user, I want to manage comments on my posts, so that I can interact with visitors and respond to their feedback.
+
+As a user, I want to see a dashboard where I can manage all my projects, blog posts, and comments in one place.
+
+As a user, I want my site to be responsive and look great on any device, so that visitors have a pleasant experience on desktop or mobile.
 
 
-## Resources:
 
-### Free high quality images :
-- https://www.pexels.com/
-- https://unsplash.com
+- (wireframe link here: https://drive.google.com/file/d/1lYrC0w_MoVw22VdCAw-m3Vf7qioIKIwk/view?usp=sharing)
+- (UML link here: https://drive.google.com/file/d/1xQifE-HqJBuAo8Llgs6-PJw-uX_FXV37/view?usp=sharing)
 
 
-
-
-### Free sounds website:
-- https://mixkit.co/
-
-### Free stock videos:
-- https://pixabay.com/videos/
-
-### Free Fonts:
-- https://fonts.google.com
-
-
-### CSS Library:
-- https://getbootstrap.com/
-- https://get.foundation/index.html
-- https://tailwindcss.com/
-
-### CSS Animation libraries:
-- https://animate.style
-- https://www.minimamente.com/project/magic/
