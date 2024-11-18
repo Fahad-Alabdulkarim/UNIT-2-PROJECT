@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-h=5_vjnnu8y!d#53rl&oru=l8ln56s(bus$xe^)b!^7uv%a))6
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://themestoredep-production.up.railway.app", "http://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://FahadSite.up.railway.app", "http://127.0.0.1"]
 
 
 # Application definition
